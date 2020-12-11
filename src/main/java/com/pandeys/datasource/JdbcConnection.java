@@ -12,7 +12,7 @@ public class JdbcConnection {
 	}
 	
 	public static DataSource getDataSource() {
-		String connectionUrl = "jdbc:mysql://127.0.0.1:3306/School";
+		String connectionUrl = "jdbc:mysql://127.0.0.1:3306/School?useSSL=false";
 		String userName = "root";
 		String password = "password";
 		

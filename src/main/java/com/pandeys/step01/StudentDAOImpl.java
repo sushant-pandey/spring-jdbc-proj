@@ -14,7 +14,8 @@ public class StudentDAOImpl implements StudentDAO {
 		String insertStudentQuery = "INSERT INTO Student VALUES (?, ?, ?)";
 		
 		Object[] objArray = {student.getRollNum(), student.getName(), student.getAddress()};
-		jdbcTemplate.update(insertStudentQuery, objArray);
+		int numberOfRowsInserted = jdbcTemplate.update(insertStudentQuery, objArray);
+		System.out.println("Num of rows inserted " + numberOfRowsInserted);
 		}
 		
 	}
