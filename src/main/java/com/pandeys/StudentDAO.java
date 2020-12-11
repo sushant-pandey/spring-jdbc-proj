@@ -2,5 +2,7 @@ package com.pandeys;
 
 public interface StudentDAO {
 	
-	public void insert(Student student);
+	void insert(Student student);
+	
+	boolean deleteRecordByRollNo(int rollNum);
 }

@@ -9,17 +9,23 @@ public class StudentDAOImpl implements StudentDAO {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
+
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
 	public void insert(Student student) {
 		String insertStudentQuery = "INSERT INTO Student VALUES (?, ?, ?)";
-		
-		Object[] objArray = {student.getRollNum(), student.getName(), student.getAddress()};
+
+		Object[] objArray = { student.getRollNum(), student.getName(), student.getAddress() };
 		int numberOfRowsInserted = jdbcTemplate.update(insertStudentQuery, objArray);
 		System.out.println("Num of rows inserted " + numberOfRowsInserted);
-		}
-		
 	}
+
+	public boolean deleteRecordByRollNo(int rollNum) {
+		String deleteStudentByRollNum = "delete from Student where Roll_No = ?";
+		int countOfRecordsDeleted = jdbcTemplate.update(deleteStudentByRollNum, rollNum);
+		return countOfRecordsDeleted == 1;
+	}
+
+}
