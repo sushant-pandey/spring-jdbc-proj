@@ -28,4 +28,10 @@ public class StudentDAOImpl implements StudentDAO {
 		return countOfRecordsDeleted == 1;
 	}
 
+	public int deleteRecordsByNameAndLocation(String name, String location) {
+		String deleteStudentByNameLocation = "delete from Student where Name = ? or Address = ?";
+		int countOfRecordsDeleted = jdbcTemplate.update(deleteStudentByNameLocation, name, location);
+		return countOfRecordsDeleted;
+	}
+
 }

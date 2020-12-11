@@ -28,4 +28,15 @@ public class StudentDAOImplTest {
 		assertTrue(recordDeleted);
 		context.close();
 	}
+	
+	@Test
+	public void testDeletionOfRecordByNameAndAddress() {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans-02.xml");
+		System.out.println("Context loaded");
+		StudentDAOImpl studentDaoImpl = context.getBean("studentDAO", StudentDAOImpl.class);
+		int recordsDeleted = studentDaoImpl.deleteRecordsByNameAndLocation("NameXXX", "AddressXXX");
+		System.out.println("records deleted = " + recordsDeleted);
+		assertTrue(recordsDeleted > 0);
+		context.close();
+	}
 }
