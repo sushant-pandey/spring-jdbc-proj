@@ -39,4 +39,13 @@ public class StudentDAOImplTest {
 		assertTrue(recordsDeleted > 0);
 		context.close();
 	}
+	
+	@Test
+	public void testTruncationOfStudentTable() {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans-02.xml");
+		System.out.println("Context loaded");
+		StudentDAOImpl studentDaoImpl = context.getBean("studentDAO", StudentDAOImpl.class);
+		studentDaoImpl.cleanUp();
+		context.close();
+	}
 }

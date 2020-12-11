@@ -33,5 +33,11 @@ public class StudentDAOImpl implements StudentDAO {
 		int countOfRecordsDeleted = jdbcTemplate.update(deleteStudentByNameLocation, name, location);
 		return countOfRecordsDeleted;
 	}
+	
+	
+	public void cleanUp() {
+		String truncateStudentTable = "truncate table Student";
+		jdbcTemplate.execute(truncateStudentTable);
+	}
 
 }
