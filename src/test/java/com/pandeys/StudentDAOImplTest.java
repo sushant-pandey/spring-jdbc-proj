@@ -11,7 +11,7 @@ public class StudentDAOImplTest {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans-02.xml");
 		System.out.println("Context loaded");
 		StudentDAOImpl studentDaoImpl = context.getBean("studentDAO", StudentDAOImpl.class);
-		studentDaoImpl.insert(new Student(102, "Student Name 02", "Location Address 02"));
+		studentDaoImpl.insert(new Student(103, "Student Name 03", "Location Address 03"));
 		context.close();
 	}
 
