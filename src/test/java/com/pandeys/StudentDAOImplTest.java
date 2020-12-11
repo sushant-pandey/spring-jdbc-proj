@@ -8,6 +8,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.pandeys.service.StudentDAOHelper;
+
 public class StudentDAOImplTest {
 
 	@Test
@@ -46,6 +48,16 @@ public class StudentDAOImplTest {
 		System.out.println("Context loaded");
 		StudentDAOImpl studentDaoImpl = context.getBean("studentDAO", StudentDAOImpl.class);
 		studentDaoImpl.cleanUp();
+		context.close();
+	}
+	
+	
+	@Test
+	public void testBatchInsertOfStudentTable() {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans-02.xml");
+		System.out.println("Context loaded");
+		StudentDAOHelper studentDAOHelper = context.getBean("studentDaoHelper", StudentDAOHelper.class);
+		studentDAOHelper.setUpStudentTable();
 		context.close();
 	}
 }

@@ -1,5 +1,8 @@
 package com.pandeys;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -38,6 +41,17 @@ public class StudentDAOImpl implements StudentDAO {
 	public void cleanUp() {
 		String truncateStudentTable = "truncate table Student";
 		jdbcTemplate.execute(truncateStudentTable);
+	}
+
+	public void insert(List<Student> students) {
+		String batchAddStudentsSql = "insert into Student values (?, ?, ?)";
+		List<Object[]> listOfStudentDetails = new ArrayList<Object[]>();
+		for(Student s : students) {
+			Object[] objArr = {s.getRollNum(), s.getName(), s.getAddress()};
+			listOfStudentDetails.add(objArr);
+		}
+		
+		jdbcTemplate.batchUpdate(batchAddStudentsSql, listOfStudentDetails);
 	}
 
 }
