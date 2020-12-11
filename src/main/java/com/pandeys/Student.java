@@ -1,4 +1,4 @@
-package com.pandeys.step01;
+package com.pandeys;
 
 public class Student {
 	private int rollNum;
