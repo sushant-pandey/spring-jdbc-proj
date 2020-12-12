@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -57,15 +58,24 @@ public class StudentDAOImpl implements StudentDAO {
 	}
 
 	public List<Student> fetchAllStudents() {
-		String fetchAllStudentsSql = "select * from Student";
-		List<Student> listOfStudents = jdbcTemplate.query(fetchAllStudentsSql, new StudentRowMapper());
+		String fetchAllStudentsSql = "select Roll_No as rollNum, "
+				+ "Name as name, "
+				+ "Address as address "
+				+ "from Student";
+		List<Student> listOfStudents = jdbcTemplate.query(fetchAllStudentsSql, 
+				new BeanPropertyRowMapper<Student>(Student.class));
 		return listOfStudents;
 	}
 
 	public Student fetchStudentByRollNo(int rollNum) {
-		String fetchStudentSql = "select * from Student where Roll_No = ? ";
-		Student student = jdbcTemplate.queryForObject(fetchStudentSql, new StudentRowMapper(), rollNum);
+		String fetchStudentSql = "select Roll_No as rollNum, "
+				+ "Name as name, "
+				+ "Address as address "
+				+ "from Student where Roll_No = ? ";
+		Student student = jdbcTemplate.queryForObject(fetchStudentSql,
+				 new BeanPropertyRowMapper<Student>(Student.class), 
+				 rollNum);
 		return student;
-	}
+}
 
 }
