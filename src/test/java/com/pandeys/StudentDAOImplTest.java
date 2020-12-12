@@ -2,6 +2,8 @@ package com.pandeys;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -112,6 +114,45 @@ public class StudentDAOImplTest {
 		for( Entry<String, List<String>> entrySet : groupStudentsByAddress.entrySet()) {
 			System.out.println(entrySet.getKey() + "::::" + entrySet.getValue());
 		}
+		context.close();
+	}
+	
+	
+	@Test
+	public void testUpdateSingleStudentAddress() {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans-02.xml");
+		System.out.println("Context loaded");
+		StudentDAOImpl studentDAO = context.getBean("studentDAO", StudentDAOImpl.class);
+		
+		Student name106 = new Student();
+		name106.setAddress("Address106");
+		name106.setRollNum(106);
+		studentDAO.update(name106);
+		
+		context.close();
+	}
+	
+	@Test
+	public void testUpdateMultipleStudentsAddress() {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans-02.xml");
+		System.out.println("Context loaded");
+		StudentDAOImpl studentDAO = context.getBean("studentDAO", StudentDAOImpl.class);
+		
+		Student name107 = new Student();
+		name107.setAddress("Address107");
+		name107.setRollNum(107);
+		
+		Student name108 = new Student();
+		name108.setAddress("Address108");
+		name108.setRollNum(108);
+		
+		Student name109 = new Student();
+		name109.setAddress("Address109");
+		name109.setRollNum(109);
+		
+		List<Student> listOfStudents = new ArrayList<Student>(Arrays.asList(name107, name108, name109));
+		int[] updatedRecords = studentDAO.updateStudents(listOfStudents);
+		System.out.println("Updated Records = " + Arrays.toString(updatedRecords));
 		context.close();
 	}
 }

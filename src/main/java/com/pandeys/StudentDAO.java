@@ -20,4 +20,8 @@ public interface StudentDAO {
 	List<Student> fetchStudentsByName(String name);
 	
 	Map<String, List<String>> groupStudentsByAddress();
+	
+	int update(Student student);
+	
+	int[] updateStudents(List<Student> students);
 }

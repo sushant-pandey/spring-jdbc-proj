@@ -1,10 +1,13 @@
 package com.pandeys;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -89,6 +92,27 @@ public class StudentDAOImpl implements StudentDAO {
 	public Map<String, List<String>> groupStudentsByAddress() {
 		String fetchAllStudentsSql = "select * from Student";
 		return jdbcTemplate.query(fetchAllStudentsSql, new StudentAddressGroupResultSetExtractor());
+	}
+
+	public int update(Student student) {
+		String updateStudentSql = "update Student set Address = ? where Roll_No = ? ";
+		return jdbcTemplate.update(updateStudentSql, student.getAddress(), student.getRollNum());
+	}
+
+	public int[] updateStudents(final List<Student> students) {
+		String updateStudentsSql = "update Student set Address = ? where Roll_No = ? ";
+		int[] updatedRecords = jdbcTemplate.batchUpdate(updateStudentsSql, new BatchPreparedStatementSetter() {
+
+			public void setValues(PreparedStatement ps, int i) throws SQLException {
+				ps.setString(1, students.get(i).getAddress());
+				ps.setInt(2, students.get(i).getRollNum());
+			}
+
+			public int getBatchSize() {
+				return students.size();
+			}
+		});
+		return updatedRecords;
 	}
 
 }
