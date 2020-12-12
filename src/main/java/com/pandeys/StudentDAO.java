@@ -15,4 +15,6 @@ public interface StudentDAO {
 	List<Student> fetchAllStudents();
 	
 	Student fetchStudentByRollNo(int rollNum);
+	
+	List<Student> fetchStudentsByName(String name);
 }

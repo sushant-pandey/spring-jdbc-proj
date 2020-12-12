@@ -84,4 +84,17 @@ public class StudentDAOImplTest {
 		System.out.println(student);
 		context.close();
 	} 
+	
+	
+	@Test
+	public void testFetchStudentByName() {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans-02.xml");
+		System.out.println("Context loaded");
+		StudentDAOImpl studentDAO = context.getBean("studentDAO", StudentDAOImpl.class);
+		List<Student> listOfStudents = studentDAO.fetchStudentsByName("Name110");
+		for(Student s : listOfStudents) {
+			System.out.println(s);
+		}
+		context.close();
+	}
 }

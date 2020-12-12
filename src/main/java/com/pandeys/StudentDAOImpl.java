@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.pandeys.mapper.StudentRowMapper;
+import com.pandeys.resultextractor.StudentResultSetExtractor;
 
 @Repository("studentDAO")
 public class StudentDAOImpl implements StudentDAO {
@@ -77,5 +78,10 @@ public class StudentDAOImpl implements StudentDAO {
 				 rollNum);
 		return student;
 }
+
+	public List<Student> fetchStudentsByName(String name) {
+		String fetchStudentsByNameSql = "select * from Student where Name = ?";
+		return jdbcTemplate.query(fetchStudentsByNameSql, new StudentResultSetExtractor(), name);
+	}
 
 }
