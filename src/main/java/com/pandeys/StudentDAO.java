@@ -11,4 +11,8 @@ public interface StudentDAO {
 	boolean deleteRecordByRollNo(int rollNum);
 	
 	int deleteRecordsByNameAndLocation(String name, String location);
+	
+	List<Student> fetchAllStudents();
+	
+	Student fetchStudentByRollNo(int rollNum);
 }

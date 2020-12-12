@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.pandeys.mapper.StudentRowMapper;
+
 @Repository("studentDAO")
 public class StudentDAOImpl implements StudentDAO {
 
@@ -52,6 +54,18 @@ public class StudentDAOImpl implements StudentDAO {
 		}
 		
 		jdbcTemplate.batchUpdate(batchAddStudentsSql, listOfStudentDetails);
+	}
+
+	public List<Student> fetchAllStudents() {
+		String fetchAllStudentsSql = "select * from Student";
+		List<Student> listOfStudents = jdbcTemplate.query(fetchAllStudentsSql, new StudentRowMapper());
+		return listOfStudents;
+	}
+
+	public Student fetchStudentByRollNo(int rollNum) {
+		String fetchStudentSql = "select * from Student where Roll_No = ? ";
+		Student student = jdbcTemplate.queryForObject(fetchStudentSql, new StudentRowMapper(), rollNum);
+		return student;
 	}
 
 }

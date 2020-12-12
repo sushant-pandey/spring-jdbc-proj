@@ -2,6 +2,8 @@ package com.pandeys;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
+
 import javax.validation.constraints.AssertTrue;
 
 import org.junit.Test;
@@ -60,4 +62,26 @@ public class StudentDAOImplTest {
 		studentDAOHelper.setUpStudentTable();
 		context.close();
 	}
+	
+	@Test
+	public void testFetchAllStudents() {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans-02.xml");
+		System.out.println("Context loaded");
+		StudentDAOImpl studentDAO = context.getBean("studentDAO", StudentDAOImpl.class);
+		List<Student> listOfStudents = studentDAO.fetchAllStudents();
+		for(Student s : listOfStudents) {
+			System.out.println(s);
+		}
+		context.close();
+	} 
+	
+	@Test
+	public void testFetchStudentByRollNum() {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans-02.xml");
+		System.out.println("Context loaded");
+		StudentDAOImpl studentDAO = context.getBean("studentDAO", StudentDAOImpl.class);
+		Student student = studentDAO.fetchStudentByRollNo(108);
+		System.out.println(student);
+		context.close();
+	} 
 }
