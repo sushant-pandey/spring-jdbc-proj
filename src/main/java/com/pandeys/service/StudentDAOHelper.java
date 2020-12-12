@@ -22,11 +22,11 @@ public class StudentDAOHelper {
 				new Student(103, "Name103", "Address103"),
 				new Student(104, "Name104", "Address104"),
 				new Student(105, "Name105", "Address105"),
-				new Student(106, "Name106", "Address106"),
-				new Student(107, "Name107", "Address107"),
-				new Student(108, "Name108", "Address108"),
-				new Student(109, "Name109", "Address109"),
-				new Student(110, "Name110", "Address110")
+				new Student(106, "Name106", "Address101"),
+				new Student(107, "Name107", "Address102"),
+				new Student(108, "Name108", "Address103"),
+				new Student(109, "Name109", "Address104"),
+				new Student(110, "Name110", "Address105")
 				);
 		studentDao.insert(listOfStudents);
 	}

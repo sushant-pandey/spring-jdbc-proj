@@ -1,6 +1,7 @@
 package com.pandeys;
 
 import java.util.List;
+import java.util.Map;
 
 public interface StudentDAO {
 	
@@ -17,4 +18,6 @@ public interface StudentDAO {
 	Student fetchStudentByRollNo(int rollNum);
 	
 	List<Student> fetchStudentsByName(String name);
+	
+	Map<String, List<String>> groupStudentsByAddress();
 }

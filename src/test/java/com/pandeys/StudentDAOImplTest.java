@@ -3,6 +3,8 @@ package com.pandeys;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.validation.constraints.AssertTrue;
 
@@ -94,6 +96,21 @@ public class StudentDAOImplTest {
 		List<Student> listOfStudents = studentDAO.fetchStudentsByName("Name110");
 		for(Student s : listOfStudents) {
 			System.out.println(s);
+		}
+		context.close();
+	}
+	
+	@Test
+	public void testFetchStudentGroupedByAddress() {
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("beans-02.xml");
+		System.out.println("Context loaded");
+		StudentDAOImpl studentDAO = context.getBean("studentDAO", StudentDAOImpl.class);
+		Map<String, List<String>> groupStudentsByAddress = studentDAO.groupStudentsByAddress();
+		System.out.println(groupStudentsByAddress);
+		
+		//Print values of hashmap using entry set
+		for( Entry<String, List<String>> entrySet : groupStudentsByAddress.entrySet()) {
+			System.out.println(entrySet.getKey() + "::::" + entrySet.getValue());
 		}
 		context.close();
 	}

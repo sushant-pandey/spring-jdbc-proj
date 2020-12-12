@@ -2,6 +2,7 @@ package com.pandeys;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -9,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.pandeys.mapper.StudentRowMapper;
+import com.pandeys.resultextractor.StudentAddressGroupResultSetExtractor;
 import com.pandeys.resultextractor.StudentResultSetExtractor;
 
 @Repository("studentDAO")
@@ -82,6 +84,11 @@ public class StudentDAOImpl implements StudentDAO {
 	public List<Student> fetchStudentsByName(String name) {
 		String fetchStudentsByNameSql = "select * from Student where Name = ?";
 		return jdbcTemplate.query(fetchStudentsByNameSql, new StudentResultSetExtractor(), name);
+	}
+
+	public Map<String, List<String>> groupStudentsByAddress() {
+		String fetchAllStudentsSql = "select * from Student";
+		return jdbcTemplate.query(fetchAllStudentsSql, new StudentAddressGroupResultSetExtractor());
 	}
 
 }
