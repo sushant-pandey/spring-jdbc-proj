@@ -139,15 +139,15 @@ public class StudentDAOImplTest {
 		StudentDAOImpl studentDAO = context.getBean("studentDAO", StudentDAOImpl.class);
 		
 		Student name107 = new Student();
-		name107.setAddress("Address107");
+		name107.setAddress("Address107ABC");
 		name107.setRollNum(107);
 		
 		Student name108 = new Student();
-		name108.setAddress("Address108");
+		name108.setAddress("Address108ABC");
 		name108.setRollNum(108);
 		
 		Student name109 = new Student();
-		name109.setAddress("Address109");
+		name109.setAddress("Address109ABC");
 		name109.setRollNum(109);
 		
 		List<Student> listOfStudents = new ArrayList<Student>(Arrays.asList(name107, name108, name109));

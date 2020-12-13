@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.pandeys.mapper.StudentRowMapper;
 import com.pandeys.resultextractor.StudentAddressGroupResultSetExtractor;
@@ -99,6 +100,7 @@ public class StudentDAOImpl implements StudentDAO {
 		return jdbcTemplate.update(updateStudentSql, student.getAddress(), student.getRollNum());
 	}
 
+	@Transactional
 	public int[] updateStudents(final List<Student> students) {
 		String updateStudentsSql = "update Student set Address = ? where Roll_No = ? ";
 		int[] updatedRecords = jdbcTemplate.batchUpdate(updateStudentsSql, new BatchPreparedStatementSetter() {
